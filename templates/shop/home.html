@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <h1>Cupcakes feitos para adoçar o seu dia</h1>
+    <p>Escolha seus sabores favoritos e faça seu pedido em poucos minutos.</p>
+    <a class="button button-primary button-large" href="#favoritos">Ver cupcakes</a>
+  </div>
+  <div class="hero-media"><img src="{% static 'images/brigadeiro-intenso.png' %}" alt="Cupcake gourmet de brigadeiro"></div>
+</section>
+<section class="favorites" id="favoritos">
+  <div class="section-heading"><h2>Os favoritos da casa</h2><p>Receitas artesanais preparadas para tornar o dia mais doce.</p></div>
+  <div class="product-grid">
+    {% for product in products %}{% include 'shop/_product.html' %}{% empty %}<p>Os cupcakes serão adicionados em breve.</p>{% endfor %}
+  </div>
+  <div class="section-action"><a class="text-link" href="{% url 'shop:product_list' %}">Ver todo o cardápio</a></div>
+</section>
+{% endblock %}
+

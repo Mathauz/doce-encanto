@@ -1,0 +1,50 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Doce Encanto - cupcakes artesanais para pedidos online.">
+  <title>{% block title %}Doce Encanto{% endblock %}</title>
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Navegação principal">
+      <a class="brand" href="{% url 'shop:home' %}" aria-label="Doce Encanto, início">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 22h20l-3 19H17l-3-19Z"/><path d="M16 20c0-4 3-7 7-7 0-4 3-7 7-7 1 4-1 7-4 9 4 0 7 2 8 5H16Z"/><path d="M20 26l1 11m6-11-1 11"/></svg>
+        <span>Doce Encanto</span>
+      </a>
+      <div class="nav-links">
+        <a href="{% url 'shop:home' %}">Início</a>
+        <a href="{% url 'shop:product_list' %}">Cupcakes</a>
+        {% if user.is_authenticated %}<a href="{% url 'shop:order_list' %}">Meus pedidos</a>{% endif %}
+      </div>
+      <div class="nav-actions">
+        <a class="cart-link" href="{% url 'shop:cart_detail' %}" aria-label="Carrinho com {{ cart_count }} itens">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H7M10 20h.01M17 20h.01"/></svg>
+          <span>{{ cart_count }}</span>
+        </a>
+        {% if user.is_authenticated %}
+          <form action="{% url 'shop:logout' %}" method="post">{% csrf_token %}<button class="button button-quiet" type="submit">Sair</button></form>
+        {% else %}
+          <a class="button button-quiet" href="{% url 'shop:login' %}">Entrar</a>
+          <a class="button button-primary" href="{% url 'shop:register' %}">Criar conta</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+  {% if messages %}
+    <div class="message-stack" aria-live="polite">
+      {% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}
+    </div>
+  {% endif %}
+  <main id="conteudo">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div><strong>Doce Encanto</strong><span>Projeto acadêmico de comércio eletrônico</span></div>
+    <p>Pagamentos e pedidos são demonstrativos.</p>
+  </footer>
+</body>
+</html>

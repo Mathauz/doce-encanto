@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Carrinho | Doce Encanto{% endblock %}
+{% block content %}
+<section class="page-shell narrow-shell">
+  <header class="page-heading"><h1>Seu carrinho</h1><p>Revise as quantidades antes de finalizar.</p></header>
+  {% if cart.count %}
+    <div class="cart-list">
+      {% for item in cart %}
+      <article class="cart-row">
+        <div><h2>{{ item.product.name }}</h2><p>R$ {{ item.unit_price|floatformat:2 }} por unidade</p></div>
+        <form class="quantity-form" action="{% url 'shop:cart_update' item.product.pk %}" method="post">
+          {% csrf_token %}<label for="q-{{ item.product.pk }}">Quantidade</label><input id="q-{{ item.product.pk }}" type="number" name="quantity" min="1" max="20" value="{{ item.quantity }}"><button class="button button-quiet" type="submit">Atualizar</button>
+        </form>
+        <strong>R$ {{ item.subtotal|floatformat:2 }}</strong>
+        <form action="{% url 'shop:cart_remove' item.product.pk %}" method="post">{% csrf_token %}<button class="text-button" type="submit">Remover</button></form>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="cart-summary"><span>Total</span><strong>R$ {{ cart.get_total|floatformat:2 }}</strong></div>
+    <div class="cart-actions"><a class="button button-quiet" href="{% url 'shop:product_list' %}">Continuar comprando</a><a class="button button-primary" href="{% url 'shop:checkout' %}">Finalizar pedido</a></div>
+  {% else %}
+    <div class="empty-state"><h2>Seu carrinho está vazio</h2><p>Conheça os sabores da Doce Encanto e escolha o primeiro cupcake.</p><a class="button button-primary" href="{% url 'shop:product_list' %}">Ver cupcakes</a></div>
+  {% endif %}
+</section>
+{% endblock %}

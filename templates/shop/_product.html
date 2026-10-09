@@ -1,0 +1,21 @@
+{% load static %}
+<article class="product-card">
+  <a class="product-image-link" href="{% url 'shop:product_list' %}#produto-{{ product.pk }}" tabindex="-1" aria-hidden="true">
+    <img src="{% static product.image %}" alt="Cupcake {{ product.name }}" loading="lazy">
+  </a>
+  <div class="product-copy">
+    <div>
+      <h3 id="produto-{{ product.pk }}">{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+    </div>
+    <strong class="price">R$ {{ product.price|floatformat:2 }}</strong>
+  </div>
+  <form action="{% url 'shop:cart_add' product.pk %}" method="post">
+    {% csrf_token %}<input type="hidden" name="quantity" value="1"><input type="hidden" name="next" value="{{ request.path }}">
+    <button class="button button-primary button-wide" type="submit">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H7M10 20h.01M17 20h.01"/></svg>
+      Adicionar ao carrinho
+    </button>
+  </form>
+</article>
+

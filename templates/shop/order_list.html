@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Meus pedidos | Doce Encanto{% endblock %}
+{% block content %}
+<section class="page-shell narrow-shell">
+  <header class="page-heading"><h1>Meus pedidos</h1><p>Acompanhe o histórico das suas encomendas demonstrativas.</p></header>
+  <div class="order-list">
+    {% for order in orders %}<a class="order-row" href="{% url 'shop:order_detail' order.pk %}"><div><strong>Pedido #{{ order.pk }}</strong><span>{{ order.created_at|date:'d/m/Y H:i' }}</span></div><span class="status status-{{ order.status }}">{{ order.get_status_display }}</span><strong>R$ {{ order.total|floatformat:2 }}</strong></a>{% empty %}<div class="empty-state"><h2>Você ainda não fez pedidos</h2><p>Seu histórico aparecerá aqui após a primeira compra.</p><a class="button button-primary" href="{% url 'shop:product_list' %}">Ver cupcakes</a></div>{% endfor %}
+  </div>
+</section>
+{% endblock %}
+

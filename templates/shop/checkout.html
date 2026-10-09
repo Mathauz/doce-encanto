@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Finalizar pedido | Doce Encanto{% endblock %}
+{% block content %}
+<section class="page-shell checkout-layout">
+  <div>
+    <header class="page-heading"><h1>Finalizar pedido</h1><p>Informe onde deseja receber. Nenhuma cobrança real será realizada.</p></header>
+    {% if cart_error %}<div class="form-error">{{ cart_error }} <a href="{% url 'shop:product_list' %}">Escolher cupcakes</a></div>{% endif %}
+    <form class="checkout-form" method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}<div class="field {% if field.name == 'notes' or field.name == 'street' %}field-wide{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span aria-hidden="true"> *</span>{% endif %}</label>{{ field }}{% for error in field.errors %}<span class="field-error">{{ error }}</span>{% endfor %}</div>{% endfor %}
+      <div class="field-wide"><button class="button button-primary button-large" type="submit" {% if cart_error %}disabled{% endif %}>Confirmar pedido demonstrativo</button></div>
+    </form>
+  </div>
+  <aside class="order-summary"><h2>Resumo</h2>{% for item in cart %}<div><span>{{ item.quantity }}× {{ item.product.name }}</span><strong>R$ {{ item.subtotal|floatformat:2 }}</strong></div>{% endfor %}<div class="summary-total"><span>Total</span><strong>R$ {{ cart.get_total|floatformat:2 }}</strong></div><p>Pagamento simulado para fins acadêmicos.</p></aside>
+</section>
+{% endblock %}
+

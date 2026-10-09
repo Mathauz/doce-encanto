@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Cupcakes | Doce Encanto{% endblock %}
+{% block content %}
+<section class="page-shell">
+  <header class="page-heading"><h1>Nossos cupcakes</h1><p>Escolha o seu favorito. Cada unidade é preparada artesanalmente.</p></header>
+  <div class="product-grid product-grid-full">
+    {% for product in products %}{% include 'shop/_product.html' %}{% empty %}<p>Nenhum produto disponível.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}
+
