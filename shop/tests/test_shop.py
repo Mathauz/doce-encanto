@@ -10,6 +10,15 @@ from shop.models import Order, OrderItem, Product
 
 
 class ProductModelTests(TestCase):
+    def test_browser_favicon_request_redirects_to_static_asset(self):
+        response = self.client.get("/favicon.ico")
+        self.assertRedirects(
+            response,
+            "/static/images/favicon.svg",
+            status_code=301,
+            fetch_redirect_response=False,
+        )
+
     def test_product_rejects_negative_price(self):
         product = Product(name="Inválido", description="Teste", price=Decimal("-1.00"))
         with self.assertRaises(Exception):

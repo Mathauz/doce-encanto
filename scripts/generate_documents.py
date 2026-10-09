@@ -307,7 +307,7 @@ def build_main_docx(path: Path) -> None:
     ], [5.2, 3.2, 9])
 
     add_heading(doc, "10. Testes e laudo de qualidade")
-    add_body(doc, "A suíte automatizada executou 15 testes em modelos, formulários, autenticação, carrinho, totais, checkout transacional, permissões, página inicial e seed. Resultado final: 15 aprovados, zero falhas e 87% de cobertura total. O comando de verificação do Django não apontou problemas. O workflow do GitHub repete python manage.py test a cada push e pull request.")
+    add_body(doc, "A suíte automatizada executou 16 testes em modelos, formulários, autenticação, carrinho, totais, checkout transacional, permissões, página inicial, favicon e seed. Resultado final: 16 aprovados, zero falhas e 87% de cobertura total. O comando de verificação do Django não apontou problemas. O workflow do GitHub repete python manage.py test a cada push e pull request.")
     add_heading(doc, "10.1 Sessões internas de QA (simuladas)", level=2)
     add_body(doc, "As cinco sessões a seguir são avaliações internas simuladas para fins acadêmicos. Não representam colegas ou pessoas reais.")
     add_table(doc, ["Sessão", "Data", "Funcionou", "Achado e correção", "Não testado"], qa, [3, 2.2, 5, 5.5, 3], 7)
@@ -369,7 +369,7 @@ def build_main_docx(path: Path) -> None:
         ("2:05–2:55", "Demonstrar limite 1–20 e recálculo de preços no servidor."),
         ("2:55–3:40", "Explicar transação do checkout e preservação do snapshot."),
         ("3:40–4:20", "Mostrar teste de acesso a pedido alheio retornando 404."),
-        ("4:20–5:00", "Exibir 15 testes, 87% de cobertura e pipeline do GitHub."),
+        ("4:20–5:00", "Exibir 16 testes, 87% de cobertura e pipeline do GitHub."),
     ], [3, 14.5])
 
     add_heading(doc, "13. Conclusão")
@@ -402,7 +402,7 @@ def build_pit_docx(path: Path) -> None:
         16: "Testes da Solução",
         17: "As cinco avaliações abaixo são sessões internas simuladas (QA-01 a QA-05), usadas somente para validação acadêmica. Não correspondem a colegas ou pessoas reais.",
         26: "Laudo de Qualidade",
-        27: "Resultado final: 15 testes automatizados aprovados, zero falhas, cobertura total de 87% e console do navegador sem erros. Achados e correções estão resumidos abaixo.",
+        27: "Resultado final: 16 testes automatizados aprovados, zero falhas, cobertura total de 87% e console do navegador sem erros. Achados e correções estão resumidos abaixo.",
         28: "1. A ordem dos produtos em destaque não seguia a curadoria. Correção: ordenação por data de criação; teste específico aprovado.",
         29: "2. O favicon gerava resposta 404. Correção: inclusão de favicon SVG local; novo smoke test registrou zero erros e zero avisos.",
         30: "3. Os totais e limites precisam ser confiáveis. Correção: recálculo no servidor, quantidade entre 1 e 20 e bloqueio de produto inativo.",
@@ -557,7 +557,7 @@ def build_main_pdf(path: Path) -> None:
         ("User", "username, email, password hash", "Autenticação nativa Django"),
     ], [3*cm, 9.5*cm, 4.5*cm], s))
     h("7. Testes e laudo de qualidade")
-    body("Resultado final: 15 testes automatizados aprovados, zero falhas e 87% de cobertura. O Django check não apontou problemas. O workflow do GitHub executa a suíte em push e pull request.")
+    body("Resultado final: 16 testes automatizados aprovados, zero falhas e 87% de cobertura. O Django check não apontou problemas. O workflow do GitHub executa a suíte em push e pull request.")
     story.append(pdf_table(["Sessão", "Funcionou", "Achado/correção", "Fora do escopo"], [(a,c,d,e) for a,b,c,d,e in qa], [3.2*cm, 4.6*cm, 6.1*cm, 3*cm], s))
     h2("Laudo")
     story.append(pdf_table(["Defeito", "Correção", "Verificação"], [
@@ -574,7 +574,7 @@ def build_main_pdf(path: Path) -> None:
     h2("Vídeo funcional — cerca de 5 minutos")
     story.append(pdf_table(["Tempo", "Ação"], [("0:00–0:30","Problema, marca e pagamento acadêmico."),("0:30–1:15","Homepage e catálogo."),("1:15–2:00","Cadastro/login."),("2:00–2:45","Carrinho e total."),("2:45–3:40","Checkout."),("3:40–4:20","Histórico e isolamento."),("4:20–4:50","Admin e status."),("4:50–5:00","GitHub, testes e URL.")], [3*cm, 13.8*cm], s))
     h2("Vídeo de correções — até 5 minutos")
-    story.append(pdf_table(["Tempo", "Ação"], [("0:00–0:35","Explicar QA simulada."),("0:35–1:25","Ordem dos destaques."),("1:25–2:05","Favicon e console."),("2:05–2:55","Limites e totais."),("2:55–3:40","Transação e snapshots."),("3:40–4:20","Isolamento 404."),("4:20–5:00","15 testes, 87% e CI.")], [3*cm, 13.8*cm], s))
+    story.append(pdf_table(["Tempo", "Ação"], [("0:00–0:35","Explicar QA simulada."),("0:35–1:25","Ordem dos destaques."),("1:25–2:05","Favicon e console."),("2:05–2:55","Limites e totais."),("2:55–3:40","Transação e snapshots."),("3:40–4:20","Isolamento 404."),("4:20–5:00","16 testes, 87% e CI.")], [3*cm, 13.8*cm], s))
     h("10. Conclusão e referências")
     body("A solução atende ao fluxo planejado e cobre os principais riscos com validação no servidor, transações, permissões, testes e documentação. Referências: documentação Django 5.2; Render Deploy Django e Free Instances; materiais institucionais PIT I e PIT II.")
     doc = NumberedDoc(str(path), pagesize=A4, rightMargin=2*cm, leftMargin=2*cm, topMargin=1.8*cm, bottomMargin=1.7*cm, title="Doce Encanto — Documentação")
@@ -591,7 +591,7 @@ def build_pit_pdf(path: Path) -> None:
         ("Vídeo narrado", "A inserir após gravação pelo aluno"),
     ], [5*cm, 11.8*cm], s)]
     story += [Paragraph("Testes da solução", s["h1"]), Paragraph("QA-01 a QA-05 são sessões internas simuladas; não representam pessoas reais.", s["body"]), pdf_table(["Sessão/data", "Funcionou", "Falha/correção", "Não testado"], [(f"{a}<br/>{b}",c,d,e) for a,b,c,d,e in qa], [3.4*cm, 4.6*cm, 6*cm, 2.8*cm], s)]
-    story += [Paragraph("Laudo de qualidade", s["h1"]), Paragraph("15 testes aprovados, zero falhas, 87% de cobertura e console final sem erros ou avisos. Correções: ordem de destaques por criação; favicon local; recálculo de preços e limite 1–20; isolamento por usuário; transação atômica no checkout.", s["body"])]
+    story += [Paragraph("Laudo de qualidade", s["h1"]), Paragraph("16 testes aprovados, zero falhas, 87% de cobertura e console final sem erros ou avisos. Correções: ordem de destaques por criação; favicon local; recálculo de preços e limite 1–20; isolamento por usuário; transação atômica no checkout.", s["body"])]
     story += [Paragraph("Vídeo da solução atualizada", s["h1"]), Paragraph("Link a inserir após a gravação e publicação pelo aluno. O roteiro de até cinco minutos está na documentação completa.", s["body"])]
     doc = NumberedDoc(str(path), pagesize=A4, rightMargin=2*cm, leftMargin=2*cm, topMargin=1.8*cm, bottomMargin=1.7*cm, title="PIT II preenchida")
     doc.build(story)
